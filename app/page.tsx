@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Heart, Users, Stethoscope, BarChart3, ArrowRight, Shield, Zap, Clock, Ambulance } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { Navigation } from "@/components/navigation"
 
 export default function Home() {
   const [selectedRole, setSelectedRole] = useState<string | null>(null)
@@ -70,9 +71,11 @@ export default function Home() {
   ]
 
   return (
-    <main className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-border  ">
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      <main>
+        {/* Hero Section */}
+        <section className="relative overflow-hidden border-b border-border">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
@@ -98,14 +101,14 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/login?role=passenger">
+              <Link href="#roles">
                 <Button size="lg" className="gap-2 px-8 h-12 text-base font-semibold">
                   Get Started <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>
-              <Link href="#roles">
+              <Link href="/about">
                 <Button size="lg" variant="outline" className="px-8 h-12 text-base font-semibold bg-transparent">
-                  Explore Roles
+                  Learn More
                 </Button>
               </Link>
             </div>
@@ -298,14 +301,15 @@ export default function Home() {
               Join the healthcare revolution on railways. Access your role-specific dashboard and start providing or
               receiving medical care today.
             </p>
-            <Link href="/login?role=passenger">
+            <Link href="#roles">
               <Button size="lg" className="gap-2 px-8 h-12 text-base font-semibold">
-                Sign In Now <ArrowRight className="w-5 h-5" />
+                Choose Your Role <ArrowRight className="w-5 h-5" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </div>
   )
 }

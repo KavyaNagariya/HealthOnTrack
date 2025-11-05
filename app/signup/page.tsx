@@ -15,7 +15,7 @@ export default function SignupPage() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { signup } = useAuth()
-  const role = (searchParams.get("role") || "passenger") as "passenger" | "attendant" | "doctor" | "admin"
+  const role = searchParams.get("role") as "passenger" | "attendant" | "doctor" | "admin" | null
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -33,6 +33,11 @@ export default function SignupPage() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
+
+    if (!role) {
+      setError("Please select a role first by going back to the home page")
+      return
+    }
 
     // Validate form
     if (!name.trim()) {
@@ -84,7 +89,9 @@ export default function SignupPage() {
               <span className="text-xl font-bold text-primary">Healthcare on the Move</span>
             </div>
             <CardTitle>Create Account</CardTitle>
-            <CardDescription>Sign up as {roleNames[role] || "User"}</CardDescription>
+            <CardDescription>
+              {role ? `Sign up as ${roleNames[role]}` : "Please select your role first"}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignup} className="space-y-4">
@@ -137,14 +144,14 @@ export default function SignupPage() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={loading}>
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={loading || !role}>
                 {loading ? "Creating account..." : "Sign Up"}
               </Button>
             </form>
             <div className="mt-4 text-center text-sm">
               <p className="text-muted-foreground">
                 Already have an account?{" "}
-                <Link href={`/login?role=${role}`} className="text-primary hover:underline">
+                <Link href={role ? `/login?role=${role}` : "/login"} className="text-primary hover:underline">
                   Sign in
                 </Link>
               </p>

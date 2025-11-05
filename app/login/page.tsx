@@ -15,7 +15,7 @@ export default function LoginPage() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { login } = useAuth()
-  const role = (searchParams.get("role") || "passenger") as "passenger" | "attendant" | "doctor" | "admin"
+  const role = searchParams.get("role") as "passenger" | "attendant" | "doctor" | "admin" | null
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
@@ -29,6 +29,12 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!role) {
+      alert("Please select a role first by going back to the home page")
+      return
+    }
+
     setLoading(true)
 
     try {
@@ -57,7 +63,9 @@ export default function LoginPage() {
               <span className="text-xl font-bold text-primary">Healthcare on the Move</span>
             </div>
             <CardTitle>Sign In</CardTitle>
-            <CardDescription>Login as {roleNames[role] || "User"}</CardDescription>
+            <CardDescription>
+              {role ? `Login as ${roleNames[role]}` : "Please select your role first"}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
@@ -83,14 +91,19 @@ export default function LoginPage() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={loading}>
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={loading || !role}>
                 {loading ? "Signing in..." : "Sign In"}
               </Button>
+              {!role && (
+                <p className="text-sm text-destructive text-center mt-2">
+                  Please select a role from the home page first
+                </p>
+              )}
             </form>
             <div className="mt-4 text-center text-sm">
               <p className="text-muted-foreground">
                 Don't have an account?{" "}
-                <Link href={`/signup?role=${role}`} className="text-primary hover:underline">
+                <Link href={role ? `/signup?role=${role}` : "/signup"} className="text-primary hover:underline">
                   Sign up
                 </Link>
               </p>
