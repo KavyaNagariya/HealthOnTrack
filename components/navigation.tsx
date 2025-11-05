@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, X } from "lucide-react"
+import { Menu } from "lucide-react"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -24,15 +24,15 @@ export function Navigation() {
           <Link href="/" className="flex items-center space-x-2">
             <Image
               src="/logo.jpeg"
-              alt="Healthcare on the Move"
+              alt="HealthOnTrack"
               width={40}
               height={40}
               className="rounded-lg"
             />
-            <span className="text-xl font-bold text-primary">Healthcare on the Move</span>
+            <span className="text-xl font-bold text-primary">HealthOnTrack</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation and Auth Buttons - Right Aligned */}
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
@@ -43,10 +43,6 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-          </div>
-
-          {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-3">
             <Link href="/login">
               <Button variant="ghost" size="sm">
                 Login

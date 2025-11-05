@@ -43,7 +43,7 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email Support",
-      details: "support@healthcareonthemove.com",
+      details: "support@healthontrack.com",
       description: "24/7 email support for all inquiries"
     },
     {
@@ -181,7 +181,7 @@ export default function ContactPage() {
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Get in Touch</h2>
                 <p className="text-muted-foreground">
-                  Multiple ways to reach our support team for assistance with the Healthcare on the Move platform.
+                  Multiple ways to reach our support team for assistance with the HealthOnTrack platform.
                 </p>
               </div>
 

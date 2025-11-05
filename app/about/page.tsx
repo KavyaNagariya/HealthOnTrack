@@ -44,7 +44,7 @@ export default function AboutPage() {
         {/* Hero Section */}
         <section className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 tracking-tight">
-            About <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Healthcare on the Move</span>
+            About <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">HealthOnTrack</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Revolutionizing railway healthcare with comprehensive medical support, emergency response coordination, 
@@ -127,7 +127,7 @@ export default function AboutPage() {
                 </p>
                 <div className="flex items-center justify-center gap-2">
                   <Heart className="w-5 h-5 text-primary" />
-                  <span className="text-primary font-semibold">Healthcare on the Move Team</span>
+                  <span className="text-primary font-semibold">HealthOnTrack Team</span>
                 </div>
               </div>
             </CardContent>
