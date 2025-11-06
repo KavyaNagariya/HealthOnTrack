@@ -25,8 +25,6 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
-
-
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
@@ -60,18 +58,13 @@ export default function SignupPage() {
     setLoading(true)
 
     try {
+      // Just signup, don't login
       await signup(name, email, password, selectedRole as "passenger" | "attendant" | "doctor" | "admin")
-      // Route to appropriate dashboard
-      const dashboardRoutes: Record<string, string> = {
-        passenger: "/dashboard/passenger",
-        attendant: "/dashboard/attendant",
-        doctor: "/dashboard/doctor",
-        admin: "/dashboard/admin",
-      }
-      router.push(dashboardRoutes[selectedRole] || "/dashboard/passenger")
-    } catch (error) {
+      // After successful signup, redirect to login page
+      router.push("/login?role=" + selectedRole + "&signup=success")
+    } catch (error: any) {
       console.error("Signup failed:", error)
-      setError("Signup failed. Please try again.")
+      setError(error.message || "Signup failed. Please try again.")
       setLoading(false)
     }
   }

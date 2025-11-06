@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -17,18 +17,35 @@ export default function LoginPage() {
   const router = useRouter()
   const { login } = useAuth()
   const initialRole = searchParams.get("role") as "passenger" | "attendant" | "doctor" | "admin" | null
+  const signupSuccess = searchParams.get("signup") === "success"
   const [selectedRole, setSelectedRole] = useState<string>(initialRole || "")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-
+  useEffect(() => {
+    if (signupSuccess) {
+      setError("Signup successful! Please login with your credentials.")
+    }
+  }, [signupSuccess])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
 
     if (!selectedRole) {
-      alert("Please select a role")
+      setError("Please select a role")
+      return
+    }
+
+    if (!email.trim()) {
+      setError("Email is required")
+      return
+    }
+
+    if (!password) {
+      setError("Password is required")
       return
     }
 
@@ -44,8 +61,9 @@ export default function LoginPage() {
         admin: "/dashboard/admin",
       }
       router.push(dashboardRoutes[selectedRole] || "/dashboard/passenger")
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login failed:", error)
+      setError(error.message || "Invalid email or password")
       setLoading(false)
     }
   }
@@ -66,6 +84,11 @@ export default function LoginPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
+              {error && (
+                <div className="p-3 bg-destructive/10 border border-destructive/30 rounded text-sm text-destructive">
+                  {error}
+                </div>
+              )}
               <div className="space-y-2">
                 <Label htmlFor="role">Select Role</Label>
                 <Select value={selectedRole} onValueChange={setSelectedRole}>
