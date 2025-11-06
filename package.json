@@ -2,11 +2,17 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.x",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
+    "dev:webpack": "next dev --webpack",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "build:db": "echo 'Database setup skipped in serverless environment'"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

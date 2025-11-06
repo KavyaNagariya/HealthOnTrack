@@ -18,7 +18,7 @@ export interface EmergencyRequest {
   type: string
   description: string
   severity: 'low' | 'medium' | 'high' | 'critical'
-  location: string
+  location?: string
   status: 'pending' | 'in_progress' | 'resolved' | 'cancelled'
   assigned_to?: string
   response?: string
