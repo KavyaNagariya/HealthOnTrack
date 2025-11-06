@@ -3,9 +3,9 @@
 ## 🔧 Fixes Applied
 
 ### 1. **Node.js Version Compatibility**
-- ✅ Added `.nvmrc` file specifying Node 18
+- ✅ Added `.nvmrc` file specifying Node 20.9.0 (required for Next.js 16)
 - ✅ Added `engines` field in `package.json`
-- ✅ Configured Netlify to use Node 18.x
+- ✅ Configured Netlify to use Node 20.9.0
 
 ### 2. **SQLite Compatibility Issues**
 - ✅ Created serverless-compatible database layer (`lib/database-serverless.ts`)
@@ -35,7 +35,7 @@ NODE_ENV=production
 ### 2. **Build Settings**
 - **Build command**: `node scripts/netlify-build.js && npm run build`
 - **Publish directory**: `.next`
-- **Node version**: 18.x
+- **Node version**: 20.9.0 (required for Next.js 16)
 
 ### 3. **Deploy**
 ```bash
